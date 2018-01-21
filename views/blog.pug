@@ -1,0 +1,18 @@
+doctype html
+html(lang='en')
+  head
+    title Blog
+  body
+    h1 Your Blog Posts
+    if posts
+      each post in posts
+        h2= post.title
+        p= post.message
+      else
+        h2 no posts here
+    #container.col
+      form(method='POST', action='/blog')
+        input(type='text', name='title' placeholder='type a title for your post', required='')
+        input(type='textarea', name='message' placeholder='type your message', required='')
+        input(type='submit', value='Post')
+    a(href='/') Return to Home Page
