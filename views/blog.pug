@@ -1,8 +1,6 @@
-doctype html
-html(lang='en')
-  head
-    title Blog
-  body
+extends layout
+
+block content
     h1 Your Blog Posts
     if posts
       each post in posts

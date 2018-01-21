@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
 const Post = require('./models/posts.js');
-
+const path = require('path');
 const bodyParser = require('body-parser');
 
 app.use(bodyParser());
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
 
@@ -23,7 +23,7 @@ app.get('/blog', (req, res)=>{
 
 app.post('/blog', (req, res)=>{
   //res.send('blog is live..')
-  Post.sync() 
+  Post.sync()
       .then(()=>{
         return Post.create({
           title: req.body.title,
@@ -34,6 +34,10 @@ app.post('/blog', (req, res)=>{
         res.redirect('/blog')
       })
 });
+
+app.get('/portfolio', (req, res)=>{
+  res.render('portfolio')
+})
 
 app.listen(3000, ()=>{
   console.log('app is listening on port 3000')
